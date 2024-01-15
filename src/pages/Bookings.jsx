@@ -20,13 +20,13 @@ const Bookings = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                if (!data.error) {
-                    setBookings(data)
-                } else {
+                if (data.error) {
                     navigate("/")
+                } else {
+                    setBookings(data)
                 }
             })
-    }, [url, navigate])
+    }, [])
     const handleDelete = id => {
         Swal.fire({
             title: "Do you want to delete this booking?",
