@@ -21,9 +21,8 @@ const Login = () => {
             .then(res => {
                 const user = res.user;
                 if (user) {
-                    form.reset();
                     navigate(from, { replace: true })
-
+                    form.reset();
                 }
             })
             .catch(err => {
@@ -34,7 +33,6 @@ const Login = () => {
         googleSignIn()
             .then(res => {
                 const user = res.user;
-                console.log(user)
                 if (user) {
                     navigate(from, { replace: true })
                 }

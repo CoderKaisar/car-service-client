@@ -31,8 +31,8 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
+            console.log(currentUser)
             setLoading(false)
-
             if (currentUser && currentUser.email) {
                 const loggedUser = {
                     email: user?.email
@@ -46,21 +46,62 @@ const AuthProvider = ({ children }) => {
                 })
                     .then(res => res.json())
                     .then(data => {
-                        console.log("jwt response", data)
-                        if (data) {
-                            localStorage.setItem('car-service-token', data.token);
-                        }
+                        console.log('jwt response', data)
+                        localStorage.setItem('carServiceToken', data.token);
                     })
 
             } else {
-                localStorage.removeItem('car-service-token')
+                localStorage.removeItem('carServiceToken')
             }
         })
 
         return () => {
             unSubscribe()
         }
-    }, [])
+    }, [user])
+
+    // useEffect(() => {
+    //     const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
+    //         setUser(currentUser);
+    //         console.log(currentUser);
+    //         setLoading(false);
+
+    //         if (currentUser && currentUser.email) {
+    //             const loggedUser = {
+    //                 email: user?.email
+    //             };
+
+    //             try {
+    //                 // Wait for the JWT request to complete before storing the token
+    //                 const response = await fetch('https://car-service-server-site-eta.vercel.app/jwt', {
+    //                     method: "POST",
+    //                     headers: {
+    //                         "content-type": "application/json"
+    //                     },
+    //                     body: JSON.stringify(loggedUser)
+    //                 });
+
+    //                 if (response.ok) {
+    //                     const data = await response.json();
+    //                     console.log('jwt response', data);
+    //                     localStorage.setItem('carServiceToken', data.token);
+    //                 } else {
+    //                     console.error('JWT request failed:', response.statusText);
+    //                 }
+    //             } catch (error) {
+    //                 console.error('Error during JWT request:', error);
+    //             }
+    //         } else {
+    //             localStorage.removeItem('carServiceToken');
+    //         }
+    //     });
+
+    //     return () => {
+    //         unSubscribe();
+    //     };
+    // }, [user]);
+
+    console.log(user)
     const authInfo = {
         user,
         createUser,

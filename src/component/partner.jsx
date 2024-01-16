@@ -33,7 +33,7 @@ const Partner = () => {
             <h2 className='mt-4 text-xl font-semibold text-center'>Our Partner</h2>
             <div className='flex gap-10 justify-center items-center mt-10 bg-gray-200'>
                 {
-                    partners.map(partner => <img className='w-40 rounded-full' src={partner.src} />)
+                    partners.map((partner) => <div key={partner._id}><img className='w-40 rounded-full' src={partner.src} /></div>)
                 }
             </div>
         </div>

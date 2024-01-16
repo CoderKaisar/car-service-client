@@ -14,12 +14,12 @@ const Bookings = () => {
         fetch(url, {
             method: "GET",
             headers: {
-                authorization: `Bearer ${localStorage.getItem('car-service-token')}`
+                authorization: `Bearer ${localStorage.getItem('carServiceToken')}`
             }
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                console.log(data.email)
                 if (data.error) {
                     navigate("/")
                 } else {
